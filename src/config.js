@@ -1,0 +1,1 @@
+export const TASK_SERVERSIDE_ENDPOINT = 'http://localhost:3000';
