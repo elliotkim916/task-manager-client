@@ -2,14 +2,16 @@ import axios from 'axios';
 import { TASK_SERVERSIDE_ENDPOINT } from './config';
 
 export const signUp = (userInfo) => {
-  const { name, email, password, age, avatar } = userInfo;
+  const { name, age, email, password, avatar } = userInfo;
 
   return axios.post(`${TASK_SERVERSIDE_ENDPOINT}/users`, {
     name,
     email,
-    password
+    password,
+    age,
+    avatar
   })
-  .then(res => console.log(res));
+  .then(res => res.data);
 };
 
 export const logIn = (userInfo) => {

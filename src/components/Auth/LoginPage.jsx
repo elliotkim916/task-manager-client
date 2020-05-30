@@ -5,7 +5,7 @@ const LoginPage = ({ history }) => {
   return (
     <React.Fragment>
       <h1>Log In</h1>
-      <Form history={history} />
+      <Form history={history} type='login' />
     </React.Fragment>
   );
 };
