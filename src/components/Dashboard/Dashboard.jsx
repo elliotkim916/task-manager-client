@@ -1,14 +1,14 @@
 import React from 'react';
-import { clearAuthToken } from '../../local-storage';
+import { logOut } from '../../api';
 
-const Dashboard = (props) => {
+const Dashboard = ({ history }) => {
   return (
     <div>
       <button 
         type="button" 
         onClick={() => {
-          clearAuthToken();
-          props.history.push('/');
+          logOut();
+          history.push('/');
         }}
       >
         Log Out
