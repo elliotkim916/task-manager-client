@@ -12,10 +12,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router history={history}>
-          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/" render={() => <LandingPage history={history} />} />
           <Route exact path="/signup" render={() => <SignupPage history={history} />} />
           <Route exact path="/login" render={() => <LoginPage history={history} />} />
-          <Route exact path="/dashboard" component={Dashboard} /> 
+          <Route exact path="/dashboard" render={() => <Dashboard history={history} />} /> 
         </Router>
       </div>
     );
