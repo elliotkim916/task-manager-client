@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { logOut } from '../../api';
 import RequiresLogin from '../../HOC/RequiresLogin';
+import { getTasks } from  '../../api';
 
 const Dashboard = ({ history }) => {
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   return (
     <RequiresLogin>
       <div>

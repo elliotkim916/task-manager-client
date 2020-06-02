@@ -41,3 +41,16 @@ export const logOut = () => {
     }
   });
 };
+
+export const getTasks = () => {
+  const authToken = loadAuthToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  };
+
+  return axios.get(`${TASK_SERVERSIDE_ENDPOINT}/tasks`, {
+    headers
+  })
+  .then(res => res.data);
+};
