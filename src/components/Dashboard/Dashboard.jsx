@@ -13,7 +13,7 @@ const Dashboard = ({ history }) => {
   }, []);
 
   let allTasks;
-  allTasks = tasks.map(task => <Task task={task} key={task._id}/>);
+  allTasks = tasks.map(task => <Task task={task} key={task._id} history={history} />);
 
   return (
     <RequiresLogin>

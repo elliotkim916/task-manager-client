@@ -1,12 +1,15 @@
 import React from 'react';
+import classes from './Task.module.css';
 
-const Task = ({ task }) => {
+const Task = ({ task, history }) => {
   if (task) {
     return (
-      <div key={task._id}>
-        <h1>Description: {task.description}</h1>
-        <h3>Completed: {task.completed}</h3>
-        <h3>Created At: {task.createdAt}</h3>
+      <div 
+        key={task._id} 
+        className={classes.taskContainer}
+        onClick={() => history.push(`/task/${task._id}`)}
+      >
+        <h3>Description: {task.description}</h3>
       </div>
     );
   } else {

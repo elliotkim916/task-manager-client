@@ -54,3 +54,33 @@ export const getTasks = () => {
   })
   .then(res => res.data);
 };
+
+export const getTask = (id) => {
+  const authToken = loadAuthToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  };
+
+  return axios.get(`${TASK_SERVERSIDE_ENDPOINT}/tasks/${id}`, {
+    headers
+  })
+  .then(res => res.data);
+};
+
+export const deleteTask = (id) => {
+  const authToken = loadAuthToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  };
+
+  return axios.delete(`${TASK_SERVERSIDE_ENDPOINT}/tasks/${id}`, {
+    headers
+  })
+  .then(res => {
+    if (res.status === 200) {
+      return console.log('Delete successful');
+    }
+  });
+};

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { logIn, signUp } from '../api';
-import { saveAuthToken } from '../local-storage';
+import { logIn, signUp } from '../../api';
+import { saveAuthToken } from '../../local-storage';
 
-const Form = ({ history, type }) => {
+const UserForm = ({ history, type }) => {
   const [userData, setUserData] = useState({
     name: '',
     age: '',
@@ -87,4 +87,4 @@ const Form = ({ history, type }) => {
   );
 };
 
-export default Form;
+export default UserForm;

@@ -1,0 +1,6 @@
+.taskContainer {
+  border: 1px solid black;
+  width: 400px;
+  margin: 0 auto 50px auto;
+  padding: 7px;
+}

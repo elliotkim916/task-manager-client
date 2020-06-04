@@ -1,11 +1,11 @@
 import React from 'react';
-import Form from '../Form';
+import UserForm from '../Forms/UserForm';
 
 const LoginPage = ({ history }) => {
   return (
     <React.Fragment>
       <h1>Log In</h1>
-      <Form history={history} type='login' />
+      <UserForm history={history} type='login' />
     </React.Fragment>
   );
 };
