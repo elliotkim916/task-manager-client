@@ -2,6 +2,7 @@ import axios from 'axios';
 import { TASK_SERVERSIDE_ENDPOINT } from './config';
 import { loadAuthToken, clearAuthToken } from './local-storage';
 
+// user requests
 export const signUp = (userInfo) => {
   const { name, age, email, password, avatar } = userInfo;
 
@@ -42,6 +43,7 @@ export const logOut = () => {
   });
 };
 
+// task requests
 export const getTasks = () => {
   const authToken = loadAuthToken();
   const headers = {
@@ -83,4 +85,20 @@ export const deleteTask = (id) => {
       return console.log('Delete successful');
     }
   });
+};
+
+export const updateTask = (id, updatedTask) => {
+  const authToken = loadAuthToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  };
+
+  return axios.patch(`${TASK_SERVERSIDE_ENDPOINT}/tasks/${id}`, {
+    description: updatedTask.description,
+    details: updatedTask.details,
+    completed: updatedTask.completed
+  },
+  { headers })
+  .then(res => res.data);
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { deleteTask } from '../../api';
 
-const DeleteForm = ({ id, setShowModal, history }) => {
+const DeleteForm = ({ id, setShowDeleteModal, history }) => {
   return (
     <div>
       <form>
@@ -17,7 +17,7 @@ const DeleteForm = ({ id, setShowModal, history }) => {
         </button>
         <button 
           type="button" 
-          onClick={() => setShowModal(false)}
+          onClick={() => setShowDeleteModal(false)}
         >
           No
         </button>
