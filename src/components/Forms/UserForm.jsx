@@ -17,6 +17,7 @@ const UserForm = ({ history, type }) => {
     if (type === 'login') {
       logIn(userData)
         .then(res => {
+          console.log(res);
           if (res.token) {
             saveAuthToken(res.token);
 

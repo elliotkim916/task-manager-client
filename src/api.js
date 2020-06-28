@@ -93,12 +93,30 @@ export const updateTask = (id, updatedTask) => {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${authToken}`
   };
-
+  
   return axios.patch(`${TASK_SERVERSIDE_ENDPOINT}/tasks/${id}`, {
-    description: updatedTask.description,
-    details: updatedTask.details,
-    completed: updatedTask.completed
-  },
-  { headers })
+    ...updatedTask
+  }, { 
+    headers 
+  })
+  .then(res => {
+    console.log(res);
+    return res.data;
+  })
+  .catch(e => console.log(e.response))
+};
+
+export const createTask = (newTask) => {
+  const authToken = loadAuthToken();
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${authToken}`
+  };
+
+  return axios.post(`${TASK_SERVERSIDE_ENDPOINT}/tasks`, {
+    ...newTask
+  }, {
+    headers
+  })
   .then(res => res.data);
 };

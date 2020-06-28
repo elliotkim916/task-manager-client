@@ -3,9 +3,11 @@ import { logOut } from '../../api';
 import RequiresLogin from '../../HOC/RequiresLogin';
 import { getTasks } from  '../../api';
 import Task from '../Task/Task';
+import CreateForm from '../Forms/CreateForm';
 
 const Dashboard = ({ history }) => {
   const [tasks, setTasks] = useState([]);
+  const [showCreate, setShowCreate] = useState(false);
 
   useEffect(() => {
     getTasks()
@@ -29,7 +31,10 @@ const Dashboard = ({ history }) => {
         </button>
 
         <h1>Welcome to the Dashboard!</h1>
-
+        
+        <button type="button" onClick={() => setShowCreate(true)}>Create Task</button><br/><br/><br/>
+        
+        { showCreate ? <CreateForm setShowCreate={setShowCreate}/> : null }
         { allTasks }
       </div>
     </RequiresLogin>

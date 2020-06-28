@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { updateTask } from '../../api';
+import { createTask } from '../../api';
 
-const UpdateForm = ({ task, setShowUpdateModal, history }) => {
+const CreateForm = ({ setShowCreate }) => {
   const inputEl = useRef(null);
 
   useEffect(() => {
@@ -12,21 +12,14 @@ const UpdateForm = ({ task, setShowUpdateModal, history }) => {
 
   return (
     <Formik
-      initialValues={{ description: task.description, details: task.details, completed: task.completed }}
+      initialValues={{ description: '', details: '', completed: '' }}
       validationSchema={Yup.object({
-        description: Yup.string().required('Description is required..')
+        description: Yup.string().required('Description is required..'),
+        completed: Yup.string().required('Completion information is required..')
       })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
-        console.log(task._id);
-        updateTask(task._id, { ...values })
-          // .then(data => {
-          //   console.log(data);
-          //   if (data.completed === 'true' || data.completed === true) {
-          //     history.push('/dashboard');
-          //   }
-          // })
+        createTask({ ...values }).then(data => console.log(data))
       }}
     >
       <Form>
@@ -34,11 +27,12 @@ const UpdateForm = ({ task, setShowUpdateModal, history }) => {
         <ErrorMessage name="description" /><br/>
         <Field name="details" type="text" placeholder="Enter details" /><br />
         <Field name="completed" type="text" placeholder="Task completed, true or false?"/><br />
-        <button type="submit">Update Task</button>
-        <button type="button" onClick={() => setShowUpdateModal(false)}>Cancel</button>
+        <ErrorMessage name="completed" /><br/>
+        <button type="submit">Create Task</button>
+        <button type="button" onClick={() => setShowCreate(false)}>Cancel</button>
       </Form>
     </Formik>
   );
 };
 
-export default UpdateForm;
+export default CreateForm;
