@@ -18,15 +18,12 @@ const UpdateForm = ({ task, setShowUpdateModal, history }) => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        console.log(values);
-        console.log(task._id);
         updateTask(task._id, { ...values })
-          // .then(data => {
-          //   console.log(data);
-          //   if (data.completed === 'true' || data.completed === true) {
-          //     history.push('/dashboard');
-          //   }
-          // })
+          .then(data => {  
+            if (data.completed === 'true' || data.completed === true) {
+              history.push('/dashboard');
+            }
+          });
       }}
     >
       <Form>

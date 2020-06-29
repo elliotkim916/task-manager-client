@@ -19,7 +19,8 @@ const CreateForm = ({ setShowCreate }) => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(false);
-        createTask({ ...values }).then(data => console.log(data))
+        createTask({ ...values })
+          .then(() => window.location.reload());
       }}
     >
       <Form>
