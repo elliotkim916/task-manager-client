@@ -1,4 +1,3 @@
-import React from 'react';
 import { deleteTask, createTask, updateTask } from '../api';
 import createDataContext from './createDataContext';
 
@@ -17,13 +16,10 @@ const tasksReducer = (state, action) => {
     case 'DELETE_TASK':
       return state.filter((task) => task._id !== action.payload);
     case 'UPDATE_TASK':
-      state.find((task) => {
-        if (task._id === action.payload.id) {
-          const index = state.indexOf(task);
-          state[index] = action.payload.newTask;
-          return state;
-        }
-      });
+      const taskToEdit = state.find((task) => task._id === action.payload.id);
+      const index = state.indexOf(taskToEdit);
+      state[index] = action.payload.newTask;
+      return state;
     default:
       return state;
   }
@@ -35,7 +31,6 @@ const getTasksAction = (dispatch) => (tasks) => {
 
 const createTaskAction = (dispatch) => async (task) => {
   const newTask = await createTask({ ...task });
-  console.log(newTask);
   dispatch({ type: 'CREATE_TASK', payload: newTask });
 };
 
