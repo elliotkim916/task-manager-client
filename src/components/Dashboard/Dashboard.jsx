@@ -1,27 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { logOut } from '../../api';
 import RequiresLogin from '../../HOC/RequiresLogin';
-import { getTasks } from  '../../api';
 import Task from '../Task/Task';
 import CreateForm from '../Forms/CreateForm';
+import { Context as TasksContext } from '../../context/TasksContext';
+import { getTasks } from '../../api';
+// import Test from '../Test';
 
 const Dashboard = ({ history }) => {
-  const [tasks, setTasks] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
+  const [showCreateCompleteModal, setShowCreateCompleteModal] = useState(false);
+  const { getTasksAction, state } = useContext(TasksContext);
 
   useEffect(() => {
-    getTasks()
-      .then(res => setTasks([...res]));
-  }, []);
+    if (state.length === 0) {
+      getTasks().then((tasks) => getTasksAction(tasks));
+    }
+  }, [getTasksAction, state]);
 
   let allTasks;
-  allTasks = tasks.map(task => <Task task={task} key={task._id} history={history} />);
+  allTasks = state.map((task) => (
+    <Task task={task} key={task._id} history={history} />
+  ));
+
+  let showCreateForm, createCompleteModal;
+  if (showCreate) {
+    showCreateForm = (
+      <CreateForm
+        setShowCreate={setShowCreate}
+        setShowCreateCompleteModal={setShowCreateCompleteModal}
+      />
+    );
+  } else {
+    showCreateForm = null;
+  }
+
+  if (showCreateCompleteModal) {
+    createCompleteModal = (
+      <div>
+        <h3>Your task has been successfully saved!</h3>
+        <button type="button" onClick={() => setShowCreateCompleteModal(false)}>
+          Okay
+        </button>
+      </div>
+    );
+  } else {
+    createCompleteModal = null;
+  }
 
   return (
     <RequiresLogin>
       <div>
-        <button 
-          type="button" 
+        <button
+          type="button"
           onClick={() => {
             logOut();
             history.push('/');
@@ -30,12 +61,19 @@ const Dashboard = ({ history }) => {
           Log Out
         </button>
 
-        <h1>Welcome to the Dashboard!</h1>
-        
-        <button type="button" onClick={() => setShowCreate(true)}>Create Task</button><br/><br/><br/>
-        
-        { showCreate ? <CreateForm setShowCreate={setShowCreate}/> : null }
-        { allTasks }
+        <h1>Welcome to the Dashboard</h1>
+
+        <button type="button" onClick={() => setShowCreate(true)}>
+          Create Task
+        </button>
+        <br />
+        <br />
+        <br />
+
+        {showCreateForm}
+        {createCompleteModal}
+        {allTasks}
+        {/* <Test /> */}
       </div>
     </RequiresLogin>
   );
