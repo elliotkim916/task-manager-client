@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { getTask } from '../../api';
 import DeleteForm from '../Forms/DeleteForm';
 import UpdateForm from '../Forms/UpdateForm';
+import AsyncComponent from '../../HOC/AsyncComponent';
+
+const AsyncNewTest = AsyncComponent(() => {
+  return import('../Test');
+});
 
 const ViewTask = (props) => {
   const [task, setTask] = useState({});
@@ -92,6 +97,7 @@ const ViewTask = (props) => {
       {updateCompleteModal}
       {deleteModal}
       {deleteCompleteModal}
+      <AsyncNewTest />
     </div>
   );
 };

@@ -13,6 +13,7 @@ const CreateForm = ({ setShowCreate, setShowCreateCompleteModal }) => {
 
   const { createTaskAction } = useContext(TasksContext);
 
+  console.log('Create form render');
   return (
     <Formik
       initialValues={{ description: '', details: '', completed: '' }}

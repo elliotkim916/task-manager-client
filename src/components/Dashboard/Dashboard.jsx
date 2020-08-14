@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { logOut } from '../../api';
 import RequiresLogin from '../../HOC/RequiresLogin';
 import Task from '../Task/Task';
 import CreateForm from '../Forms/CreateForm';
 import { Context as TasksContext } from '../../context/TasksContext';
 import { getTasks } from '../../api';
-// import Test from '../Test';
 
 const Dashboard = ({ history }) => {
   const [showCreate, setShowCreate] = useState(false);
@@ -48,6 +47,7 @@ const Dashboard = ({ history }) => {
     createCompleteModal = null;
   }
 
+  console.log('Dashboard render');
   return (
     <RequiresLogin>
       <div>
@@ -73,7 +73,6 @@ const Dashboard = ({ history }) => {
         {showCreateForm}
         {createCompleteModal}
         {allTasks}
-        {/* <Test /> */}
       </div>
     </RequiresLogin>
   );

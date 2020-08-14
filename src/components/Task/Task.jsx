@@ -1,11 +1,12 @@
 import React from 'react';
 import classes from './Task.module.css';
 
-const Task = ({ task, history }) => {
+const Task = React.memo(({ task, history }) => {
+  console.log('Task render');
   if (task) {
     return (
-      <div 
-        key={task._id} 
+      <div
+        key={task._id}
         className={classes.taskContainer}
         onClick={() => history.push(`/task/${task._id}`)}
       >
@@ -15,6 +16,6 @@ const Task = ({ task, history }) => {
   } else {
     return null;
   }
-};
+});
 
 export default Task;
